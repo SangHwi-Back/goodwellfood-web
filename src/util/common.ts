@@ -5,9 +5,9 @@
  * @param {any} obj - 점검하고자 하는 변수
  * @returns {obj is T} - 변환 가능하다면 true, 아니면 false
  */
-export function isObjectOfType<T>(obj: any): obj is T {
+export function isObjectOfType<T>(obj: unknown): obj is T {
   const result = <T>obj;
-  return result !== undefined || result !== null;
+  return result !== undefined;
 }
 
 /**
@@ -17,7 +17,7 @@ export function isObjectOfType<T>(obj: any): obj is T {
  * @param {any} obj - 변환하고자 하는 변수
  * @returns {obj is T} - 의도한 타입 혹은 null
  */
-export function getObjectOfType<T>(obj: any) {
+export function getObjectOfType<T>(obj: unknown) {
   const isSuccess = isObjectOfType<T>(obj);
   if (isSuccess) {
     return obj;
