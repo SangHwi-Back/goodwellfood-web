@@ -13,3 +13,14 @@ export function getProductCardStyleSize(size: ProductCardSize) {
     case ProductCardSize.Large: return { width: '240px', height: '300px' }
   }
 }
+
+export function getProductCardTailwindSize(size: ProductCardSize) {
+  switch (size) {
+    case ProductCardSize.Default:
+      return 'w-[200px] h-[250px]'
+    case ProductCardSize.Small:
+      return 'w-[160px] h-[200px]'
+    case ProductCardSize.Large:
+      return 'w-[240px] h-[300px]'
+  }
+}

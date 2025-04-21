@@ -13,7 +13,7 @@ interface DebounceButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 export default function DebounceButton({
   children,
   debounceTime,
-  buttonType,
+  buttonType = ButtonType.NONE,
   icon,
   trailingIcon,
   disabled,
@@ -38,23 +38,19 @@ export default function DebounceButton({
     [isClicked, debounceTime, onClick]
   );
 
-  const buttonTypeDefault = buttonType || ButtonType.DEFAULT;
-  const buttonClass = `${getButtonBackgroundColor(buttonTypeDefault)} px-4 py-2 rounded-lg text-white transition-all ${
+  const buttonClass = `flex gap-1 cursor-pointer ${getButtonBackgroundColor(buttonType)} px-4 py-2 rounded-lg text-white transition-all ${
     disabled ? ButtonType.DISABLED : ""
   }`;
 
   return (
-    <div className="flex gap-1">
+    <button
+      {...props}
+      className={buttonClass}
+      onClick={handleClick}
+      disabled={disabled || isClicked}>
       {icon ?? null}
-      <button
-        {...props}
-        className={buttonClass}
-        onClick={handleClick}
-        disabled={disabled || isClicked}
-      >
-        {children}
-      </button>
+      {children}
       {trailingIcon ?? null}
-    </div>
+    </button>
   );
 };

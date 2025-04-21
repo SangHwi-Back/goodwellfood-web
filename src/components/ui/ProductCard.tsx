@@ -1,5 +1,5 @@
 import React from 'react';
-import {ProductCardSize, getProductCardStyleSize} from "@/components/ui/ProductCardSize";
+import {ProductCardSize, getProductCardTailwindSize} from "@/components/ui/ProductCardSize";
 import ProductCardTitle from "@/components/ui/ProductCardTitle";
 import Image from "next/image";
 
@@ -21,29 +21,18 @@ type Props = {
 // ProductCard 컴포넌트
 export default function ProductCard({ product }: Props) {
   const {name, price, image, size} = product;
-  const cardStyle = {
-    ...getProductCardStyleSize(size ?? ProductCardSize.Default),
-    borderRadius: '8px',
-    overflow: 'hidden',
-    display: 'flex',
-    flexShrink: 0,
-    flexDirection: 'column' as const,
-    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
-    backgroundColor: '#fff',
-  };
-
-  const imageStyle = {
-    width: '100%',
-    height: '70%', // 카드 상단의 70%를 이미지에 할당
-    objectFit: 'cover' as const,
-  };
+  const style = `flex overflow-hidden ${getProductCardTailwindSize(size ?? ProductCardSize.Default)} flex-shrink-0 flex-col shadow-md bg-white rounded-md`;
 
   return (
-    <div style={cardStyle}>
+    <div className={style}>
       {/* 이미지 섹션 */}
-      <Image src={image} alt={name} style={imageStyle} />
+      <div className="h-7/10 w-full object-cover">
+        <Image src={image} alt={name} className={"w-full h-full border-gray-200 border-1 rounded-t-md"}/>
+      </div>
       {/* 정보 섹션 */}
+      <div className="border-b border-x border-gray-200">
       <ProductCardTitle productName={"Zucchini"} price={price}/>
+      </div>
     </div>
   );
 };

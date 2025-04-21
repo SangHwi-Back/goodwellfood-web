@@ -1,7 +1,6 @@
 import DebounceButton from "@/components/ui/DebounceButton"
 import ProductCard, {ProductModel} from "@/components/ui/ProductCard";
 import CartIcon from "@/components/ui/icon/CartIcon";
-import {ButtonType} from "@/components/ui/ButtonType";
 import SearchIcon from "@/components/ui/icon/SearchIcon";
 import ProfileIcon from "@/components/ui/icon/ProfileIcon";
 import ChevronRight from "@/components/ui/icon/ChevronRight";
@@ -19,33 +18,33 @@ export default function OverView() {
   }
 
   const Title = () => {
-    return <h1 className="text-xl font-bold text-center absolute left-1/2 transform -translate-x-1/2">Crop Market</h1>
+    return <h1 className="text-xl font-bold text-black text-center absolute left-1/2 transform -translate-x-1/2">Crop Market</h1>
   }
 
   const SectionTitle = ({title}: { title: string }) => {
-    return <h2 className="text-xl font-bold">{title}</h2>
+    return <h2 className="text-xl font-bold text-black">{title}</h2>
   }
 
   const Grouped = ({ children }: { children: React.ReactNode }) => {
     return (
-      <div className="flex items-center gap-4">
+      <div className="flex items-center">
         {React.Children.map(children, (child) => child)}
       </div>
     )
   }
 
   return (
-    <div className="flex min-h-screen flex-col w-[100vw]">
+    <div className="flex flex-col w-[100vw] bg-gray-100">
       {/* Fixed Header - 83px height */}
-      <header className="fixed top-0 left-0 right-0 h-[83px] border-b z-50 flex items-center justify-between px-4 md:px-6">
+      <header className="fixed top-0 left-0 right-0 h-[83px] border-b z-50 flex items-center justify-between px-4 md:px-6 bg-white">
         <Grouped>
-          <DebounceButton buttonType={ButtonType.NONE} icon={CartIcon()}/>
+          <DebounceButton icon={CartIcon()} style={{paddingLeft: 0}}/>
           <Logo />
         </Grouped>
         <Title />
         <Grouped>
-          <DebounceButton buttonType={ButtonType.NONE} icon={SearchIcon()}/>
-          <DebounceButton buttonType={ButtonType.NONE} icon={ProfileIcon()}/>
+          <DebounceButton icon={SearchIcon()}/>
+          <DebounceButton icon={ProfileIcon()}/>
         </Grouped>
       </header>
 
@@ -55,11 +54,11 @@ export default function OverView() {
         <section className="py-6 px-4 md:px-6">
           <div className="flex items-center justify-between mb-4">
             <SectionTitle title={"Today`s Best Selling"} />
-            <DebounceButton buttonType={ButtonType.NONE} trailingIcon={ChevronRight()}>
+            <DebounceButton trailingIcon={ChevronRight()}>
               View All
             </DebounceButton>
           </div>
-          <ScrollArea gap={10} height={250}>
+          <ScrollArea>
             {bestSellingProducts.map((product) => (
               <ProductCard key={product.id} product={product}/>
             ))}
@@ -67,14 +66,14 @@ export default function OverView() {
         </section>
 
         {/* Best Discounted Products Section */}
-        <section className="py-6 px-4 md:px-6 bg-gray-50">
-          <div className="flex items-center justify-between mb-4">
+        <section className="py-6 px-4 md:px-6">
+          <div className="flex items-center justify-between">
             <SectionTitle title="Best Discounted Products" />
-            <DebounceButton buttonType={ButtonType.NONE} trailingIcon={ChevronRight()}>
+            <DebounceButton trailingIcon={ChevronRight()}>
               View all
             </DebounceButton>
           </div>
-          <ScrollArea gap={10} height={200}>
+          <ScrollArea>
             {discountedProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
@@ -82,7 +81,7 @@ export default function OverView() {
         </section>
 
         {/* Sponsor Ads Section */}
-        <section className="py-6 px-4 md:px-6">
+        <section className="py-6 px-4 md:px-6 bg-white">
           <h2 className="text-xl font-bold mb-4">Sponsored</h2>
           <div className="grid grid-cols-1 gap-4">
             <SponsoredCardPage />

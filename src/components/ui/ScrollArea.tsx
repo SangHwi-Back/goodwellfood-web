@@ -1,15 +1,15 @@
 import React from 'react';
 
 interface ScrollAreaVerticalProps {
-  gap: number;
+  gap?: number;
   children: React.ReactNode;
-  width: number;
+  width?: number;
 }
 
 interface ScrollAreaHorizontalProps {
-  gap: number;
+  gap?: number;
   children: React.ReactNode;
-  height: number;
+  height?: number;
 }
 
 type ScrollAreaProps = ScrollAreaVerticalProps | ScrollAreaHorizontalProps;
@@ -23,21 +23,21 @@ const ScrollArea: React.FC<ScrollAreaProps> = (props) => {
       display: 'flex',
       flexDirection: 'column',
       flexShrink: 0,
-      gap: `${props.gap}px`,
+      gap: `${props.gap ?? 10}px`,
       overflow: 'hidden auto',
-      backgroundColor: 'rgba(0, 0, 0, 0.03)',
-      width: props.width,
-      paddingBottom: 20,
+      width: 'fit-content',
+      minWidth: props.width ?? 200,
+      padding: '10px 0',
     }
     : {
       display: 'flex',
       flexShrink: 0,
       flexDirection: 'row',
-      gap: `${props.gap}px`,
+      gap: `${props.gap ?? 10}px`,
       overflow: 'auto hidden',
-      backgroundColor: 'rgba(0, 0, 0, 0.03)',
-      height: props.height,
-      paddingBottom: 20,
+      height: 'fit-content',
+      minHeight: props.height ?? 300,
+      padding: '10px 0',
     };
 
   return <div style={style}>{props.children}</div>;
